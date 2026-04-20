@@ -33,8 +33,8 @@
           "KeepJobFlowAliveWhenNoSteps": true,
           "TerminationProtected": false
         },
-        "JobFlowRole": "emr-ec2-custom-role",
-        "ServiceRole": "emr-custom-service-role",
+        "JobFlowRole": "EMR_EC2_DefaultRole",
+        "ServiceRole": "EMR_DefaultRole",
         "VisibleToAllUsers": true
       },
       "ResultPath": "$.EMRClusterOutput",
@@ -54,14 +54,16 @@
               "spark-submit",
               "--deploy-mode",
               "cluster",
-              "s3://aws-de-projects-bucket/spark-scripts/spark-agg1.py"
+              "s3://aws-de-projects-bucket/spark-scripts/spark-script1.py"
             ]
           }
         }
       },
       "Catch": [
         {
-          "ErrorEquals": ["States.ALL"],
+          "ErrorEquals": [
+            "States.ALL"
+          ],
           "Next": "TerminateCluster"
         }
       ],
@@ -82,14 +84,16 @@
               "spark-submit",
               "--deploy-mode",
               "cluster",
-              "s3://aws-de-projects-bucket/spark-scripts/spark-agg2.py"
+              "s3://aws-de-projects-bucket/spark-scripts/spark-script2.py"
             ]
           }
         }
       },
       "Catch": [
         {
-          "ErrorEquals": ["States.ALL"],
+          "ErrorEquals": [
+            "States.ALL"
+          ],
           "Next": "TerminateCluster"
         }
       ],
